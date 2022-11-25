@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<ProyectoPIALabPrograWebTienda.Models.dbModels.Producto>
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Productos";
+}
+@section CSS{
+    <link rel="stylesheet" href="~/css/Productos.css" asp-append-version="true" />
+}
+
+<h1>Prroductos</h1>
+
+<div class="container">
+    <div class="row">
+@foreach (Producto item in Model)
+{
+<div class="col-lg-4 p-3 mx-auto">
+<div class="card" style="width: 18rem;">
+        <img src="~/Fotos/Productos/@Html.DisplayFor(modelItem => item.Imagen)" class="card-img-top" alt="...">
+    <div class="card-body">
+
+        <h5 class="card-title">
+            @Html.DisplayFor(model => item.Nombre)
+        </h5>
+        <p class="card-text">
+                $ @Html.DisplayFor(modelItem => item.PrecioUnitario)
+        </p>
+        <input type="number" placeholder="Cantidad de producto">
+        <a href="#" class="btn btn-primary">Añadir al carrito</a>
+    </div>
+</div>
+</div>
+}
+    </div>
+</div>
+
+  

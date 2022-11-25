@@ -1,0 +1,79 @@
+﻿@model IEnumerable<ProyectoPIALabPrograWebTienda.Models.dbModels.Producto>
+
+@{
+    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Index";
+}
+
+@section CSS{
+    <link rel="stylesheet" href="~/css/Productos.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+}
+
+<h1>Menú Productos</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Crear Nuevo Producto</a>
+       
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.PrecioUnitario)*@
+                Precio Unitario
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.IdcategoriaNavigation)*@
+                Categoria
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Imagen)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrecioUnitario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdcategoriaNavigation.Nombre)
+            </td>
+            <td>
+                    <img src="~/Fotos/Productos/@Html.DisplayFor(modelItem => item.Imagen)">
+            </td>
+            <td>
+
+                <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.Idproducto">Editar</a> |
+                <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Idproducto">Detalles</a> |
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Idproducto">Eliminar</a>
+            </td>
+        </tr>
+        
+
+}   
+    </tbody>
+    
+</table>
+
+<!-- Importamos JQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.table').DataTable();
+    });
+</script>
+
+

@@ -1,0 +1,57 @@
+﻿@model ProyectoPIALabPrograWebTienda.Models.DTO.ProductoUpdateDTO
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+@section CSS{
+    <link rel="stylesheet" href="~/css/Productos.css" asp-append-version="true" />
+}
+
+<h1>Editar</h1>
+
+<h4>Producto</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form enctype="multipart/form-data" asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Idproducto" />
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @*<label asp-for="Idcategoria" class="control-label"></label>*@
+                Categoria
+                <select asp-for="Idcategoria" class="form-control" asp-items="ViewBag.Idcategoria"></select>
+                <span asp-validation-for="Idcategoria" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @*<label asp-for="PrecioUnitario" class="control-label"></label>*@
+                Precio Unitario
+                <input asp-for="PrecioUnitario" class="form-control" />
+                <span asp-validation-for="PrecioUnitario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="hidden" asp-for="Imagen" class="form-control" />
+                <label asp-for="ImagenArchivo" class="control-label"></label>
+                <input accept="image/png,image/jpeg" asp-for="ImagenArchivo" class="form-control" />
+                <span asp-validation-for="ImagenArchivo" class="text-danger"></span>
+            </div>
+            <img src="~/Fotos/Productos/@Html.DisplayFor(modelItem => modelItem.Imagen)">
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Regresar a la Lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

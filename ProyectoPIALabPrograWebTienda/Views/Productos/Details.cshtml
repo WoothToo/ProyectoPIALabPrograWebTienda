@@ -1,0 +1,49 @@
+﻿@model ProyectoPIALabPrograWebTienda.Models.dbModels.Producto
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+@section CSS{
+    <link rel="stylesheet" href="~/css/Productos.css" asp-append-version="true" />
+}
+
+<h1>Detalles</h1>
+
+<div>
+    <h4>Producto</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            @*@Html.DisplayNameFor(model => model.PrecioUnitario)*@
+            Precio Unitario
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PrecioUnitario)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Imagen)
+        </dt>
+        <dd class = "col-sm-10">
+            @*@Html.DisplayFor(model => model.Imagen)*@
+            <img src="~/Fotos/Productos/@Html.DisplayFor(modelItem => modelItem.Imagen)">
+        </dd>
+        <dt class = "col-sm-2">
+            @*@Html.DisplayNameFor(model => model.IdcategoriaNavigation)*@
+            Categoria
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdcategoriaNavigation.Nombre)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Idproducto">Editar</a> |
+    <a asp-action="Index">Regresar a la Lista</a>
+</div>
