@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProyectoPIALabPrograWebTienda.Models.dbModels;
+using ProyectoPIALabPrograWebTienda.Models.DTO;
 
 namespace ProyectoPIALabPrograWebTienda.Controllers
 {
@@ -21,6 +23,7 @@ namespace ProyectoPIALabPrograWebTienda.Controllers
         // GET: Carrito
         public async Task<IActionResult> Index()
         {
+            //var proyectoPIALabPrograWebTiendaContext = _context.DetallesVenta.Include(d => d.IdproductoNavigation).Include(d => d.IdventaNavigation);
             var proyectoPIALabPrograWebTiendaContext = _context.DetallesVenta.Include(d => d.IdproductoNavigation).Include(d => d.IdventaNavigation);
             return View(await proyectoPIALabPrograWebTiendaContext.ToListAsync());
         }
@@ -58,17 +61,16 @@ namespace ProyectoPIALabPrograWebTienda.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Idventa,Idproducto,Precio,Cantidad")] DetallesVentum detallesVentum)
+        //public async Task<IActionResult> Create([Bind("Idventa,Idproducto,Precio,Cantidad")] DetallesVentum detallesVentum)
+        public async Task<IActionResult> Create(int idProducto)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(detallesVentum);
+                _context.Add(carrito);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Idproducto"] = new SelectList(_context.Productos, "Idproducto", "Idproducto", detallesVentum.Idproducto);
-            ViewData["Idventa"] = new SelectList(_context.Venta, "Idventa", "Idventa", detallesVentum.Idventa);
-            return View(detallesVentum);
+            return View(carrito);
         }
 
         // GET: Carrito/Edit/5

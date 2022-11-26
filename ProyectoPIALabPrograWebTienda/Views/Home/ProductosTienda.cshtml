@@ -3,37 +3,39 @@
 *@
 @model IEnumerable<ProyectoPIALabPrograWebTienda.Models.dbModels.Producto>
 @{
-    Layout = "_Layout";
-    ViewData["Title"] = "Productos";
+	Layout = "_Layout";
+	ViewData["Title"] = "Productos";
 }
 @section CSS{
-    <link rel="stylesheet" href="~/css/Productos.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/Productos.css" asp-append-version="true" />
 }
 
-<h1>Prroductos</h1>
+	<h1>Prroductos</h1>
 
-<div class="container">
-    <div class="row">
-@foreach (Producto item in Model)
-{
-<div class="col-lg-4 p-3 mx-auto">
-<div class="card" style="width: 18rem;">
-        <img src="~/Fotos/Productos/@Html.DisplayFor(modelItem => item.Imagen)" class="card-img-top" alt="...">
-    <div class="card-body">
+	<div class="container">
+		<div class="row">
+		@foreach (Producto item in Model)
+		{
+			<div class="col-lg-4 p-3 mx-auto">
+				<form asp-controller="Carrito" asp-action="Create" method="post">
+					<div class="card" style="width: 18rem;">
+						<input type="hidden" asp-for="Idproducto" />
+						<img src="~/Fotos/Productos/@Html.DisplayFor(modelItem => item.Imagen)" class="card-img-top" alt="...">
+						<div class="card-body">
 
-        <h5 class="card-title">
-            @Html.DisplayFor(model => item.Nombre)
-        </h5>
-        <p class="card-text">
-                $ @Html.DisplayFor(modelItem => item.PrecioUnitario)
-        </p>
-        <input type="number" placeholder="Cantidad de producto">
-        <a href="#" class="btn btn-primary">Añadir al carrito</a>
-    </div>
-</div>
-</div>
-}
-    </div>
+							<h5 class="card-title">
+								@Html.DisplayFor(model => item.Nombre)
+							</h5>
+							<p class="card-text">
+								$ @Html.DisplayFor(modelItem => item.PrecioUnitario)
+							</p>
+							<input type="number" placeholder="Cantidad de producto">
+							<button type="submit" class="btn btn-primary">Añadir al carrito</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		}
+	</div>
 </div>
 
-  

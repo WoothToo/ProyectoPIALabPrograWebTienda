@@ -4,16 +4,27 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+@section CSS{
+    <link rel="stylesheet" href="~/css/Productos.css" asp-append-version="true" />
+}
 
-<p>
+
+<h1>Carrito</h1>
+
+@*<p>
     <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+</p>*@
+<div class="container">
+<div class="row">
+<table class="table table-stripped table-hover">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IdproductoNavigation)
+                @*@Html.DisplayNameFor(model => model.IdproductoNavigation)*@
+                Producto
+            </th>
+            <th>
+                Imagen
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Precio)
@@ -21,10 +32,14 @@
             <th>
                 @Html.DisplayNameFor(model => model.Cantidad)
             </th>
+            <th>
+                Precio Total
+            </th>
             @*<th>
                 @Html.DisplayNameFor(model => model.IdventaNavigation)
             </th>*@
             <th></th>
+            
         </tr>
     </thead>
     <tbody>
@@ -32,12 +47,21 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.IdproductoNavigation.Idproducto)
+                Producto
+            </td>
+            <td>
+                Aqui va una imagen
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Precio)
+                Precio
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Cantidad)
+                Cantidad
+            </td>
+            <td>
+                Aqui va el precio total
             </td>
             @*<td>
                 @Html.DisplayFor(modelItem => item.IdventaNavigation.Idventa)
@@ -50,5 +74,16 @@
         </tr>
 }
     </tbody>
-    <p>hola</p>
 </table>
+<div class="col-sm-6">
+        <div class="card">
+            <h5 class="card-header">Resumen del Pedido</h5>
+            <div class="card-body">
+                <h5 class="card-title">Precio final:</h5>
+                <p class="card-text textoprecio">Aquí ira el precio final.</p>
+                <a href="#" class="btn btn-primary">Realizar compra</a>
+            </div>
+        </div>
+</div>
+</div>
+</div>
