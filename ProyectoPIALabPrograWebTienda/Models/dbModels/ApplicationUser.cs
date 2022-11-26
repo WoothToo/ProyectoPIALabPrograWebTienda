@@ -12,6 +12,7 @@ namespace ProyectoPIALabPrograWebTienda.Models.dbModels
     {
         public ApplicationUser()
         {
+            Carritos = new HashSet<Carrito>();
             Venta = new HashSet<Ventum>();
         }
 
@@ -30,5 +31,7 @@ namespace ProyectoPIALabPrograWebTienda.Models.dbModels
 
         [InverseProperty("IdusuarioNavigation")]
         public virtual ICollection<Ventum> Venta { get; set; }
+        [InverseProperty("IdusuarioNavigation")]
+        public virtual ICollection<Carrito> Carritos { get; set; }
     }
 }

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace ProyectoPIALabPrograWebTienda.Models.dbModels
 {
-    public partial class ProyectoPIALabPrograWebTiendaContext : IdentityDbContext<ApplicationUser,IdentityRole<int>,int>
+    public partial class ProyectoPIALabPrograWebTiendaContext : IdentityDbContext<ApplicationUser, IdentityRole<int>, int>
     {
         public ProyectoPIALabPrograWebTiendaContext()
         {
@@ -18,19 +18,36 @@ namespace ProyectoPIALabPrograWebTienda.Models.dbModels
         {
         }
 
+        public virtual DbSet<Carrito> Carritos { get; set; } = null!;
         public virtual DbSet<Categorium> Categoria { get; set; } = null!;
         public virtual DbSet<DetallesVentum> DetallesVenta { get; set; } = null!;
         public virtual DbSet<Producto> Productos { get; set; } = null!;
         public virtual DbSet<Ventum> Venta { get; set; } = null!;
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Carrito>(entity =>
+            {
+                entity.HasKey(e => new { e.Idusuario, e.Idproducto });
+
+                entity.HasOne(d => d.IdproductoNavigation)
+                    .WithMany(p => p.Carritos)
+                    .HasForeignKey(d => d.Idproducto)
+                    .HasConstraintName("FK_Carrito_Productos");
+
+                entity.HasOne(d => d.IdusuarioNavigation)
+                    .WithMany(p => p.Carritos)
+                    .HasForeignKey(d => d.Idusuario)
+                    .HasConstraintName("FK_Carrito_Usuario");
+            });
+
             modelBuilder.Entity<Categorium>(entity =>
             {
                 entity.HasKey(e => e.Idcategoria)
                     .HasName("PK__Categori__70E82E285CE274D3");
+
+                entity.Property(e => e.Idcategoria).ValueGeneratedNever();
             });
 
             modelBuilder.Entity<DetallesVentum>(entity =>

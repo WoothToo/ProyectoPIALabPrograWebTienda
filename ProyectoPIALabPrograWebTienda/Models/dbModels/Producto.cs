@@ -10,6 +10,7 @@ namespace ProyectoPIALabPrograWebTienda.Models.dbModels
     {
         public Producto()
         {
+            Carritos = new HashSet<Carrito>();
             DetallesVenta = new HashSet<DetallesVentum>();
         }
 
@@ -22,12 +23,13 @@ namespace ProyectoPIALabPrograWebTienda.Models.dbModels
         public int Idcategoria { get; set; }
         [Column(TypeName = "money")]
         public decimal PrecioUnitario { get; set; }
-        [Column(TypeName = "image")]
-        public string? Imagen { get; set; }
+        public string Imagen { get; set; } = null!;
 
         [ForeignKey("Idcategoria")]
         [InverseProperty("Productos")]
         public virtual Categorium IdcategoriaNavigation { get; set; } = null!;
+        [InverseProperty("IdproductoNavigation")]
+        public virtual ICollection<Carrito> Carritos { get; set; }
         [InverseProperty("IdproductoNavigation")]
         public virtual ICollection<DetallesVentum> DetallesVenta { get; set; }
     }

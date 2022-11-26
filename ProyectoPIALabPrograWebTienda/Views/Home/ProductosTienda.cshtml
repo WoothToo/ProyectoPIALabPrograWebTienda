@@ -19,7 +19,7 @@
 			<div class="col-lg-4 p-3 mx-auto">
 				<form asp-controller="Carrito" asp-action="Create" method="post">
 					<div class="card" style="width: 18rem;">
-						<input type="hidden" asp-for="Idproducto" />
+						<input type="hidden" name="idProducto" value="@item.Idproducto" />
 						<img src="~/Fotos/Productos/@Html.DisplayFor(modelItem => item.Imagen)" class="card-img-top" alt="...">
 						<div class="card-body">
 

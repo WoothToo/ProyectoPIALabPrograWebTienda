@@ -252,24 +252,39 @@ namespace ProyectoPIALabPrograWebTienda.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("ProyectoPIALabPrograWebTienda.Models.dbModels.Carrito", b =>
+                {
+                    b.Property<int>("Idusuario")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Idproducto")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
+                    b.HasKey("Idusuario", "Idproducto");
+
+                    b.HasIndex("Idproducto");
+
+                    b.ToTable("Carrito");
+                });
+
             modelBuilder.Entity("ProyectoPIALabPrograWebTienda.Models.dbModels.Categorium", b =>
                 {
                     b.Property<int>("Idcategoria")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("IDCategoria");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Idcategoria"), 1L, 1);
-
                     b.Property<string>("Descripcion")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(1)
+                        .HasColumnType("nvarchar(1)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(1)
+                        .HasColumnType("nvarchar(1)");
 
                     b.HasKey("Idcategoria")
                         .HasName("PK__Categori__70E82E285CE274D3");
@@ -313,9 +328,9 @@ namespace ProyectoPIALabPrograWebTienda.Migrations
                         .HasColumnType("int")
                         .HasColumnName("IDCategoria");
 
-                    b.Property<byte[]>("Imagen")
+                    b.Property<string>("Imagen")
                         .IsRequired()
-                        .HasColumnType("image");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -409,6 +424,27 @@ namespace ProyectoPIALabPrograWebTienda.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ProyectoPIALabPrograWebTienda.Models.dbModels.Carrito", b =>
+                {
+                    b.HasOne("ProyectoPIALabPrograWebTienda.Models.dbModels.Producto", "IdproductoNavigation")
+                        .WithMany("Carritos")
+                        .HasForeignKey("Idproducto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_Carrito_Productos");
+
+                    b.HasOne("ProyectoPIALabPrograWebTienda.Models.dbModels.ApplicationUser", "IdusuarioNavigation")
+                        .WithMany("Carritos")
+                        .HasForeignKey("Idusuario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_Carrito_Usuario");
+
+                    b.Navigation("IdproductoNavigation");
+
+                    b.Navigation("IdusuarioNavigation");
+                });
+
             modelBuilder.Entity("ProyectoPIALabPrograWebTienda.Models.dbModels.DetallesVentum", b =>
                 {
                     b.HasOne("ProyectoPIALabPrograWebTienda.Models.dbModels.Producto", "IdproductoNavigation")
@@ -452,6 +488,8 @@ namespace ProyectoPIALabPrograWebTienda.Migrations
 
             modelBuilder.Entity("ProyectoPIALabPrograWebTienda.Models.dbModels.ApplicationUser", b =>
                 {
+                    b.Navigation("Carritos");
+
                     b.Navigation("Venta");
                 });
 
@@ -462,6 +500,8 @@ namespace ProyectoPIALabPrograWebTienda.Migrations
 
             modelBuilder.Entity("ProyectoPIALabPrograWebTienda.Models.dbModels.Producto", b =>
                 {
+                    b.Navigation("Carritos");
+
                     b.Navigation("DetallesVenta");
                 });
 

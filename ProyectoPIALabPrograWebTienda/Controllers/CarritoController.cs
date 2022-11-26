@@ -66,11 +66,15 @@ namespace ProyectoPIALabPrograWebTienda.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(carrito);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                Carrito carrito = new Carrito();
+                carrito.Idproducto = idProducto;
+               // carrito.Idusuario = 
+
+               // _context.Add(carrito);
+               // await _context.SaveChangesAsync();
+               // return RedirectToAction(nameof(Index));
             }
-            return View(carrito);
+            return View();
         }
 
         // GET: Carrito/Edit/5

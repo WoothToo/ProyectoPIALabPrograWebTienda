@@ -60,10 +60,9 @@ namespace ProyectoPIALabPrograWebTienda.Migrations
                 name: "Categoria",
                 columns: table => new
                 {
-                    IDCategoria = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Descripcion = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    IDCategoria = table.Column<int>(type: "int", nullable: false),
+                    Nombre = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: false),
+                    Descripcion = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -205,7 +204,7 @@ namespace ProyectoPIALabPrograWebTienda.Migrations
                     Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     IDCategoria = table.Column<int>(type: "int", nullable: false),
                     PrecioUnitario = table.Column<decimal>(type: "money", nullable: false),
-                    Imagen = table.Column<byte[]>(type: "image", nullable: false)
+                    Imagen = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -215,6 +214,31 @@ namespace ProyectoPIALabPrograWebTienda.Migrations
                         column: x => x.IDCategoria,
                         principalTable: "Categoria",
                         principalColumn: "IDCategoria");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Carrito",
+                columns: table => new
+                {
+                    Idusuario = table.Column<int>(type: "int", nullable: false),
+                    Idproducto = table.Column<int>(type: "int", nullable: false),
+                    Cantidad = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Carrito", x => new { x.Idusuario, x.Idproducto });
+                    table.ForeignKey(
+                        name: "FK_Carrito_Productos",
+                        column: x => x.Idproducto,
+                        principalTable: "Productos",
+                        principalColumn: "IDProducto",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Carrito_Usuario",
+                        column: x => x.Idusuario,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -281,6 +305,11 @@ namespace ProyectoPIALabPrograWebTienda.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Carrito_Idproducto",
+                table: "Carrito",
+                column: "Idproducto");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DetallesVenta_IDProducto",
                 table: "DetallesVenta",
                 column: "IDProducto");
@@ -312,6 +341,9 @@ namespace ProyectoPIALabPrograWebTienda.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Carrito");
 
             migrationBuilder.DropTable(
                 name: "DetallesVenta");
