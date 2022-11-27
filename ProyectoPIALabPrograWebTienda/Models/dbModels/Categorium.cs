@@ -16,9 +16,9 @@ namespace ProyectoPIALabPrograWebTienda.Models.dbModels
         [Key]
         [Column("IDCategoria")]
         public int Idcategoria { get; set; }
-        [StringLength(1)]
+        [StringLength(100)]
         public string Nombre { get; set; } = null!;
-        [StringLength(1)]
+        [StringLength(100)]
         public string Descripcion { get; set; } = null!;
 
         [InverseProperty("IdcategoriaNavigation")]

@@ -23,6 +23,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\Fotos\Botones\" />
     <Folder Include="wwwroot\Fotos\Productos\" />
+    <Folder Include="wwwroot\lib\datatables\" />
   </ItemGroup>
 
   <ItemGroup>
