@@ -1,0 +1,69 @@
+﻿
+body{
+    margin: 0;
+    background: cornflowerblue;
+    padding-bottom: 80px;
+}
+
+.logo {
+    width: 190px;
+    height: 50px;
+}
+
+.textocabecera {
+    font-family: 'Lucida Bright';
+    font-size: 17px;
+    font-weight: bolder;
+}
+
+
+.navbarlateral {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 10%;
+    background-color: lightskyblue;
+    position: absolute;
+    overflow: auto;
+}
+
+.elementonavbarlateral {
+    display: block;
+    color: lightblue;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+li elementonavbarlateral.active {
+    background-color: #04AA6D;
+    color: white;
+}
+
+li elementonavbarlateral:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+
+footer {
+    background: white;
+    position: sticky;
+    
+}
+
+.fadmin {
+    position: absolute;
+    bottom: 0;
+    width: 1519px;
+    font-family: 'Lucida Bright';
+    font-size: 17px;
+}
+
+.infocentral {
+    border-radius: 5%;
+    background-color: rgba(253, 253, 253, .8);
+    padding: 2%;
+    position: relative;
+    top: 1px;
+    right: 25px;
+    font-family: 'Lucida Bright';
+}

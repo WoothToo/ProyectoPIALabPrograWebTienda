@@ -3,6 +3,7 @@
 @{
     Layout = "_LayoutAdmin";
     ViewData["Title"] = "Index";
+    Layout = "_LayoutAdmin";
 }
 
 @section CSS{
@@ -25,11 +26,9 @@
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.PrecioUnitario)*@
                 Precio Unitario
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.IdcategoriaNavigation)*@
                 Categoria
             </th>
             <th>
@@ -69,7 +68,7 @@
 
 
 <!-- Importamos JQuery -->
-@*<script src="~/lib/jquery/dist/jquery.min.js"></script>*@
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" charset="utf8" src="~/lib/datatables/datatables.min.js"></script>
 <script>
     $(document).ready(function () {

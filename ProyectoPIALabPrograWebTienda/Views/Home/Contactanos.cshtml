@@ -1,5 +1,58 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+    @{
+    Layout = "_Layout";
+    ViewData["Title"] = "Contáctanos";
+}
 @{
 }
+<link rel="stylesheet" href="~/css/OtrasVentanas.css" asp-append-version="true" />
+<header>
+    <h1>Contáctanos</h1>
+</header>
+<section>
+    <article>
+        <p>¿Tienes alguna queja o duda que podamos solucionar? ¡Mándala a continuación y te responderemos a la brevedad!</p>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <label for="story">Comentario enviado desde @User.Identity?.Name</label>
+            <textarea id="story" name="story"
+                rows="5" cols="5500">
+                Ingrese aquí su mensaje:
+            </textarea>
+            <input id="accept" name="accept" type="checkbox" value="y" />
+            <label>Al enviar una pregunta, authorizo que Wooth Jerseys pueda enviarme correos de regreso.</label>
+            <input id="buybtn" disabled="disabled" name="Submit" type="submit" value="Enviar" class="btn btn-primary" />
+        }
+        else
+        {
+            <label for="story">Favor de iniciar sesión para enviar un mensaje.</label>
+            <textarea disabled id="story" name="story"
+                rows="5" cols="5500">
+                Ingrese aquí su mensaje:
+            </textarea>
+        }
+        
+
+    </article>
+</section>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $('#accept').click(function () {
+        if ($('#buybtn').is(':disabled')) {
+            $('#buybtn').removeAttr('disabled');
+        } else {
+            $('#buybtn').attr('disabled', 'disabled');
+        }
+    });
+</script>
+<script>
+    $('#buybtn').click(function () {
+        $(this).removeClass('btn-primary');
+        $(this).addClass('btn-success');
+        $(this).val("Enviado");
+    });
+</script>

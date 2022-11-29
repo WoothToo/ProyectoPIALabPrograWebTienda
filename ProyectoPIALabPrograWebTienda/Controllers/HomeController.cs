@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProyectoPIALabPrograWebTienda.Models;
 using ProyectoPIALabPrograWebTienda.Models.dbModels;
+using System.Data;
 using System.Diagnostics;
 
 namespace ProyectoPIALabPrograWebTienda.Controllers
@@ -24,6 +26,22 @@ namespace ProyectoPIALabPrograWebTienda.Controllers
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public IActionResult Contactanos()
+        {
+            return View();
+        }
+
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult Admin()
         {
             return View();
         }
